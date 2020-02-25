@@ -4,8 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Library</title>
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-  
+  <h1>Library</h1>
+  <form action="/">
+    <label for="title">Book title</label>
+    <input type="text" id="title" name="title">
+    <label for="author">Book author</label>
+    <input type="text" id="author" name="author">
+    <label for="pages">Number of pages</label>
+    <input type="text" id="pages" name="pages">
+    <label for="read">Read status</label>
+    <input type="checkbox" id="read" name="read">
+
+    <input type="submit" value="Add book">
+  </form>
+  <script src="./main.js"></script>
 </body>
 </html>
