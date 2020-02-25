@@ -3,6 +3,7 @@ const inputAuthor = document.querySelector('#author');
 const inputPages = document.querySelector('#pages');
 const inputRead = document.querySelector('#read');
 const formBook = document.querySelector('form');
+const divBooks = document.querySelector('.books');
 
 formBook.addEventListener('submit',(e)=>{
   console.log(e);
@@ -13,7 +14,10 @@ formBook.addEventListener('submit',(e)=>{
   const read = inputRead.value;
   addBookToLibrary(title,author,pages,read);
 });
-let myLibrary = [];
+let myLibrary = [
+  {title:'Business laws', author:'Brian Tracy', pages:900, read:false},
+  {title:'Rich dad, poor dad', author:'Robert Kiyo.', pages:239, read:true}
+];
 
 
 function Book(title,author,pages,read) {
@@ -29,7 +33,33 @@ function addBookToLibrary(...params) {
   const book = new Book(params[0],params[1],params[2],params[3]);
 
   myLibrary.push(book);
-
-  console.log(myLibrary);
+  createBook(book)
 
 }
+
+const render = ()=>{
+  myLibrary.forEach(book=>{
+    createBook(book)
+    // console.log("each",book)
+  }) 
+}
+
+function createBook(book){
+  const div = document.createElement('div');
+  div.classList.add('card')
+
+  const pTitle = document.createElement('p');
+  const pAuthor = document.createElement('p');
+  const spanPages = document.createElement('span');
+  const spanRead = document.createElement('span');
+
+  pTitle.append(book.title)
+  pAuthor.append(book.author)
+  spanPages.append(book.pages)
+  spanRead.append(book.read=='on'?"read":"not read")
+
+  div.append(pTitle, pAuthor, spanPages,spanRead )
+  divBooks.appendChild(div)
+}
+
+render()
