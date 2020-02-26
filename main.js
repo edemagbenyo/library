@@ -64,7 +64,7 @@ function createBook(book, bookId) {
   const spanPages = document.createElement("p");
   const spanRead = document.createElement("span");
   const deleteBook = document.createElement("button");
-  deleteBook.classList.add('deletebuttton');
+  deleteBook.classList.add('deletebutton');
   deleteBook.setAttribute("data-id", bookId);
  
   pTitle.append(book.title);
@@ -73,6 +73,8 @@ function createBook(book, bookId) {
   deleteBook.innerHTML = "Delete"
   spanRead.append(book.read == "on" ? "read" : "not read");
 
+  deleteBook.addEventListener("click", bookDelete);
+  
   div.append(pTitle, pAuthor, spanPages, spanRead, deleteBook);
   divBooks.appendChild(div);
 }
@@ -82,8 +84,11 @@ render();
 const buttons = document.querySelectorAll(".deletebutton")
 buttons.forEach(button => {
   button.addEventListener("click", bookDelete);
-})
+});
 
 function bookDelete(event) {
-  console.log(event);
+  const bookId = event.target.dataset.id;
+  myLibrary.splice(bookId,1);
+  event.target.parentNode.remove();
 }
+
