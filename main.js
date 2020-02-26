@@ -17,6 +17,11 @@ formBook.addEventListener("submit", e => {
   const author = inputAuthor.value;
   const pages = inputPages.value;
   addBookToLibrary(title, author, pages);
+  //Reset text input
+
+  inputTitle.value = "";
+  inputAuthor.value = "";
+  inputPages.value = "";
 });
 
 //Initial library
