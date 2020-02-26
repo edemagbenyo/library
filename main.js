@@ -14,14 +14,14 @@ formBook.style.display = 'none';
 
 //  Initial library
 const myLibrary = [
-  { 
-    title: 'Business laws', author: 'Brian Tracy', pages: 900, read: false 
+  {
+    title: 'Business laws', author: 'Brian Tracy', pages: 900, read: false,
   },
   {
     title: 'Rich dad, poor dad',
     author: 'Robert Kiyo.',
     pages: 239,
-    read: false
+    read: false,
   },
 ];
 
@@ -77,7 +77,7 @@ function createBook(book, bookId) {
     spanPages,
     labelStatus,
     checkboxStatus,
-    deleteBook
+    deleteBook,
   );
   div.append(cardBody);
   divBooks.appendChild(div);
@@ -101,12 +101,10 @@ const render = () => {
 render();
 
 function changeBookReadStatus(event) {
-  
   const readStatus = event.target.checked;
   const { id } = event.target.parentNode.dataset;
   const book = myLibrary[id];
   book.read = readStatus;
-
 }
 
 formBook.addEventListener('submit', e => {
