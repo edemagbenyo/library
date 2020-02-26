@@ -7,6 +7,7 @@ const formButton = document.querySelector("#button")
 
 formButton.addEventListener("click", () => {
   formBook.style.display = "block"
+  formButton.style.display = "none"
 })
 
 formBook.style.display = "none"
@@ -61,6 +62,9 @@ const render = () => {
 function createBook(book, bookId) {
   const div = document.createElement("div");
   div.classList.add("card");
+  div.classList.add("col-md-6");
+  const cardBody = document.createElement("div");
+  cardBody.classList.add("card-body");
   div.setAttribute("data-id", bookId);
 
 
@@ -88,7 +92,8 @@ function createBook(book, bookId) {
   
   deleteBook.addEventListener("click", bookDelete);
 
-  div.append(pTitle, pAuthor, spanPages, labelStatus,  checkboxStatus,deleteBook);
+  cardBody.append(pTitle, pAuthor, spanPages, labelStatus,  checkboxStatus, deleteBook);
+  div.append(cardBody);
   divBooks.appendChild(div);
 }
 
