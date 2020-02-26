@@ -12,21 +12,8 @@ formButton.addEventListener('click', () => {
 
 formBook.style.display = 'none';
 
-formBook.addEventListener('submit', e => {
-  e.preventDefault();
-  const title = inputTitle.value;
-  const author = inputAuthor.value;
-  const pages = inputPages.value;
-  addBookToLibrary(title, author, pages);
-  //Reset text input
-
-  inputTitle.value = '';
-  inputAuthor.value = '';
-  inputPages.value = '';
-});
-
-//Initial library
-let myLibrary = [
+//  Initial library
+const myLibrary = [
   { title: 'Business laws', author: 'Brian Tracy', pages: 900, read: false },
   {
     title: 'Rich dad, poor dad',
@@ -43,21 +30,6 @@ function Book(title, author, pages, read = false) {
   this.pages = pages;
   this.read = read;
 }
-
-function addBookToLibrary(...params) {
-  // do stuff here
-  const book = new Book(params[0], params[1], params[2]);
-
-  myLibrary.push(book);
-  const idBook = myLibrary.length - 1;
-  createBook(book, idBook);
-}
-
-const render = () => {
-  myLibrary.forEach((book, bookId) => {
-    createBook(book, bookId);
-  });
-};
 
 function createBook(book, bookId) {
   const div = document.createElement('div');
@@ -77,7 +49,7 @@ function createBook(book, bookId) {
 
   labelStatus.appendChild(document.createTextNode('Read Status'));
 
-  //Setting classes and data-attr
+  //  Setting classes and data-attr
   deleteBook.classList.add('deletebutton');
   checkboxStatus.classList.add('readstatus');
 
@@ -103,18 +75,22 @@ function createBook(book, bookId) {
   divBooks.appendChild(div);
 }
 
+function addBookToLibrary(...params) {
+  // do stuff here
+  const book = new Book(params[0], params[1], params[2]);
+
+  myLibrary.push(book);
+  const idBook = myLibrary.length - 1;
+  createBook(book, idBook);
+}
+
+const render = () => {
+  myLibrary.forEach((book, bookId) => {
+    createBook(book, bookId);
+  });
+};
+
 render();
-
-const buttons = document.querySelectorAll('.deletebutton');
-buttons.forEach(button => {
-  button.addEventListener('click', bookDelete);
-});
-
-//Get all checkboxes
-const checkboxes = document.querySelectorAll('.readstatus');
-checkboxes.forEach(checkbox => {
-  checkbox.addEventListener('click', changeBookReadStatus);
-});
 
 function bookDelete(event) {
   const { id } = event.target.parentNode.dataset;
@@ -125,8 +101,31 @@ function bookDelete(event) {
 function changeBookReadStatus(event) {
   const readStatus = event.target.checked;
   const { id } = event.target.parentNode.dataset;
-  let book = myLibrary[id];
+  const book = myLibrary[id];
   book.read = readStatus;
 
-  console.log(myLibrary);
 }
+
+formBook.addEventListener('submit', e => {
+  e.preventDefault();
+  const title = inputTitle.value;
+  const author = inputAuthor.value;
+  const pages = inputPages.value;
+  addBookToLibrary(title, author, pages);
+  //  Reset text input
+
+  inputTitle.value = '';
+  inputAuthor.value = '';
+  inputPages.value = '';
+});
+
+const buttons = document.querySelectorAll('.deletebutton');
+buttons.forEach(button => {
+  button.addEventListener('click', bookDelete);
+});
+
+//  Get all checkboxes
+const checkboxes = document.querySelectorAll('.readstatus');
+checkboxes.forEach(checkbox => {
+  checkbox.addEventListener('click', changeBookReadStatus);
+});
