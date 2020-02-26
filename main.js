@@ -1,18 +1,18 @@
-const inputTitle = document.querySelector("#title");
-const inputAuthor = document.querySelector("#author");
-const inputPages = document.querySelector("#pages");
-const formBook = document.querySelector("form");
-const divBooks = document.querySelector(".books");
-const formButton = document.querySelector("#button")
+const inputTitle = document.querySelector('#title');
+const inputAuthor = document.querySelector('#author');
+const inputPages = document.querySelector('#pages');
+const formBook = document.querySelector('form');
+const divBooks = document.querySelector('.books');
+const formButton = document.querySelector('#button')
 
-formButton.addEventListener("click", () => {
-  formBook.style.display = "block"
-  formButton.style.display = "none"
+formButton.addEventListener('click', () => {
+  formBook.style.display = 'block'
+  formButton.style.display = 'none'
 })
 
-formBook.style.display = "none"
+formBook.style.display = 'none'
 
-formBook.addEventListener("submit", e => {
+formBook.addEventListener('submit', e => {
   e.preventDefault();
   const title = inputTitle.value;
   const author = inputAuthor.value;
@@ -20,17 +20,17 @@ formBook.addEventListener("submit", e => {
   addBookToLibrary(title, author, pages);
   //Reset text input
 
-  inputTitle.value = "";
-  inputAuthor.value = "";
-  inputPages.value = "";
+  inputTitle.value = '';
+  inputAuthor.value = '';
+  inputPages.value = '';
 });
 
 //Initial library
 let myLibrary = [
-  { title: "Business laws", author: "Brian Tracy", pages: 900, read: false },
+  { title: 'Business laws', author: 'Brian Tracy', pages: 900, read: false },
   {
-    title: "Rich dad, poor dad",
-    author: "Robert Kiyo.",
+    title: 'Rich dad, poor dad',
+    author: 'Robert Kiyo.',
     pages: 239,
     read: false
   }
@@ -60,23 +60,23 @@ const render = () => {
 };
 
 function createBook(book, bookId) {
-  const div = document.createElement("div");
-  div.classList.add("card");
-  div.classList.add("col-md-6");
-  const cardBody = document.createElement("div");
-  cardBody.classList.add("card-body");
-  div.setAttribute("data-id", bookId);
+  const div = document.createElement('div');
+  div.classList.add('card');
+  div.classList.add('col-md-6');
+  const cardBody = document.createElement('div');
+  cardBody.classList.add('card-body');
+  div.setAttribute('data-id', bookId);
 
 
-  const pTitle = document.createElement("p");
-  const pAuthor = document.createElement("p");
-  const spanPages = document.createElement("p");
-  const deleteBook = document.createElement("button");
-  const checkboxStatus = document.createElement("input");
+  const pTitle = document.createElement('p');
+  const pAuthor = document.createElement('p');
+  const spanPages = document.createElement('p');
+  const deleteBook = document.createElement('button');
+  const checkboxStatus = document.createElement('input');
 
-  const labelStatus = document.createElement("label");
+  const labelStatus = document.createElement('label');
 
-  labelStatus.appendChild(document.createTextNode("Read Status"))
+  labelStatus.appendChild(document.createTextNode('Read Status'))
 
   //Setting classes and data-attr
   deleteBook.classList.add('deletebutton');
@@ -85,12 +85,12 @@ function createBook(book, bookId) {
   pTitle.append(book.title);
   pAuthor.append(book.author);
   spanPages.append(book.pages);
-  deleteBook.innerHTML = "Delete"
+  deleteBook.innerHTML = 'Delete'
   
-  checkboxStatus.type = "checkbox";
+  checkboxStatus.type = 'checkbox';
   checkboxStatus.checked = book.read;
   
-  deleteBook.addEventListener("click", bookDelete);
+  deleteBook.addEventListener('click', bookDelete);
 
   cardBody.append(pTitle, pAuthor, spanPages, labelStatus,  checkboxStatus, deleteBook);
   div.append(cardBody);
@@ -99,13 +99,13 @@ function createBook(book, bookId) {
 
 render();
 
-const buttons = document.querySelectorAll(".deletebutton")
+const buttons = document.querySelectorAll('.deletebutton')
 buttons.forEach(button => {
-  button.addEventListener("click", bookDelete);
+  button.addEventListener('click', bookDelete);
 });
 
 //Get all checkboxes
-const checkboxes = document.querySelectorAll(".readstatus")
+const checkboxes = document.querySelectorAll('.readstatus')
 checkboxes.forEach(checkbox=>{
   checkbox.addEventListener('click',changeBookReadStatus)
 })
