@@ -14,13 +14,15 @@ formBook.style.display = 'none';
 
 //  Initial library
 const myLibrary = [
-  { title: 'Business laws', author: 'Brian Tracy', pages: 900, read: false },
+  { 
+    title: 'Business laws', author: 'Brian Tracy', pages: 900, read: false 
+  },
   {
     title: 'Rich dad, poor dad',
     author: 'Robert Kiyo.',
     pages: 239,
     read: false
-  }
+  },
 ];
 
 function Book(title, author, pages, read = false) {
@@ -29,6 +31,12 @@ function Book(title, author, pages, read = false) {
   this.author = author;
   this.pages = pages;
   this.read = read;
+}
+
+function bookDelete(event) {
+  const { id } = event.target.parentNode.dataset;
+  myLibrary.splice(id, 1);
+  event.target.parentNode.remove();
 }
 
 function createBook(book, bookId) {
@@ -92,13 +100,8 @@ const render = () => {
 
 render();
 
-function bookDelete(event) {
-  const { id } = event.target.parentNode.dataset;
-  myLibrary.splice(id, 1);
-  event.target.parentNode.remove();
-}
-
 function changeBookReadStatus(event) {
+  
   const readStatus = event.target.checked;
   const { id } = event.target.parentNode.dataset;
   const book = myLibrary[id];
