@@ -4,6 +4,7 @@ const inputPages = document.querySelector('#pages');
 const formBook = document.querySelector('form');
 const divBooks = document.querySelector('.books');
 const formButton = document.querySelector('#button');
+const readStatus = document.querySelector('#status');
 
 formButton.addEventListener('click', () => {
   formBook.style.display = 'block';
@@ -85,7 +86,7 @@ function createBook(book, bookId) {
 
 function addBookToLibrary(...params) {
   // do stuff here
-  const book = new Book(params[0], params[1], params[2]);
+  const book = new Book(params[0], params[1], params[2], params[3]);
 
   myLibrary.push(book);
   const idBook = myLibrary.length - 1;
@@ -102,7 +103,7 @@ render();
 
 function changeBookReadStatus(event) {
   const readStatus = event.target.checked;
-  const { id } = event.target.parentNode.dataset;
+  const { id } = event.target.parentNode.parentNode.dataset;
   const book = myLibrary[id];
   book.read = readStatus;
 }
@@ -112,7 +113,8 @@ formBook.addEventListener('submit', e => {
   const title = inputTitle.value;
   const author = inputAuthor.value;
   const pages = inputPages.value;
-  addBookToLibrary(title, author, pages);
+  const statusRead = readStatus.checked;
+  addBookToLibrary(title, author, pages, statusRead);
   //  Reset text input
 
   inputTitle.value = '';
