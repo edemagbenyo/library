@@ -1,0 +1,23 @@
+{
+  "name": "library",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edemagbenyo/library.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/edemagbenyo/library/issues"
+  },
+  "homepage": "https://github.com/edemagbenyo/library#readme",
+  "devDependencies": {
+    "eslint": "^6.8.0"
+  }
+}
