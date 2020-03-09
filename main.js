@@ -1,29 +1,32 @@
-const inputTitle = document.querySelector('#title');
-const inputAuthor = document.querySelector('#author');
-const inputPages = document.querySelector('#pages');
-const formBook = document.querySelector('form');
-const divBooks = document.querySelector('.books');
-const formButton = document.querySelector('#button');
-const readStatus = document.querySelector('#status');
+const inputTitle = document.querySelector("#title");
+const inputAuthor = document.querySelector("#author");
+const inputPages = document.querySelector("#pages");
+const formBook = document.querySelector("form");
+const divBooks = document.querySelector(".books");
+const formButton = document.querySelector("#button");
+const readStatus = document.querySelector("#status");
 
-formButton.addEventListener('click', () => {
-  formBook.style.display = 'block';
-  formButton.style.display = 'none';
+formButton.addEventListener("click", () => {
+  formBook.style.display = "block";
+  formButton.style.display = "none";
 });
 
-formBook.style.display = 'none';
+formBook.style.display = "none";
 
 //  Initial library
 const myLibrary = [
   {
-    title: 'Business laws', author: 'Brian Tracy', pages: 900, read: false,
+    title: "Business laws",
+    author: "Brian Tracy",
+    pages: 900,
+    read: false
   },
   {
-    title: 'Rich dad, poor dad',
-    author: 'Robert Kiyo.',
+    title: "Rich dad, poor dad",
+    author: "Robert Kiyo.",
     pages: 239,
-    read: false,
-  },
+    read: false
+  }
 ];
 
 function Book(title, author, pages, read = false) {
@@ -41,36 +44,36 @@ function bookDelete(event) {
 }
 
 function createBook(book, bookId) {
-  const div = document.createElement('div');
-  div.classList.add('card');
-  div.classList.add('col-md-6');
-  const cardBody = document.createElement('div');
-  cardBody.classList.add('card-body');
-  div.setAttribute('data-id', bookId);
+  const div = document.createElement("div");
+  div.classList.add("card");
+  div.classList.add("col-md-6");
+  const cardBody = document.createElement("div");
+  cardBody.classList.add("card-body");
+  div.setAttribute("data-id", bookId);
 
-  const pTitle = document.createElement('p');
-  const pAuthor = document.createElement('p');
-  const spanPages = document.createElement('p');
-  const deleteBook = document.createElement('button');
-  const checkboxStatus = document.createElement('input');
+  const pTitle = document.createElement("p");
+  const pAuthor = document.createElement("p");
+  const spanPages = document.createElement("p");
+  const deleteBook = document.createElement("button");
+  const checkboxStatus = document.createElement("input");
 
-  const labelStatus = document.createElement('label');
+  const labelStatus = document.createElement("label");
 
-  labelStatus.appendChild(document.createTextNode('Read Status'));
+  labelStatus.appendChild(document.createTextNode("Read Status"));
 
   //  Setting classes and data-attr
-  deleteBook.classList.add('deletebutton');
-  checkboxStatus.classList.add('readstatus');
+  deleteBook.classList.add("deletebutton");
+  checkboxStatus.classList.add("readstatus");
 
   pTitle.append(book.title);
   pAuthor.append(book.author);
   spanPages.append(book.pages);
-  deleteBook.innerHTML = 'Delete';
+  deleteBook.innerHTML = "Delete";
 
-  checkboxStatus.type = 'checkbox';
+  checkboxStatus.type = "checkbox";
   checkboxStatus.checked = book.read;
 
-  deleteBook.addEventListener('click', bookDelete);
+  deleteBook.addEventListener("click", bookDelete);
 
   cardBody.append(
     pTitle,
@@ -78,7 +81,7 @@ function createBook(book, bookId) {
     spanPages,
     labelStatus,
     checkboxStatus,
-    deleteBook,
+    deleteBook
   );
   div.append(cardBody);
   divBooks.appendChild(div);
@@ -108,27 +111,46 @@ function changeBookReadStatus(event) {
   book.read = readStatus;
 }
 
-formBook.addEventListener('submit', e => {
+formBook.addEventListener("submit", e => {
   e.preventDefault();
   const title = inputTitle.value;
   const author = inputAuthor.value;
   const pages = inputPages.value;
   const statusRead = readStatus.checked;
+
+  console.log(checkValidition(inputTitle, inputAuthor, inputPages));
+  if (!checkValidition(inputTitle, inputAuthor, inputPages)) {
+    return;
+  }
   addBookToLibrary(title, author, pages, statusRead);
   //  Reset text input
 
-  inputTitle.value = '';
-  inputAuthor.value = '';
-  inputPages.value = '';
+  inputTitle.value = "";
+  inputAuthor.value = "";
+  inputPages.value = "";
 });
 
-const buttons = document.querySelectorAll('.deletebutton');
+const buttons = document.querySelectorAll(".deletebutton");
 buttons.forEach(button => {
-  button.addEventListener('click', bookDelete);
+  button.addEventListener("click", bookDelete);
 });
 
 //  Get all checkboxes
-const checkboxes = document.querySelectorAll('.readstatus');
+const checkboxes = document.querySelectorAll(".readstatus");
 checkboxes.forEach(checkbox => {
-  checkbox.addEventListener('click', changeBookReadStatus);
+  checkbox.addEventListener("click", changeBookReadStatus);
 });
+
+const checkValidition = function(...elms) {
+  let valid = false;
+  elms.forEach(elm => {
+    const errorSpan = elm.parentElement.querySelector("span");
+    if (!elm.checkValidity()) {
+      errorSpan.innerText = elm.validationMessage;
+      return false
+    } else {
+      errorSpan.innerText = "";
+      return true;
+    }
+  });
+};

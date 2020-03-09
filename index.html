@@ -21,18 +21,21 @@
     </div>
 
     <div class="mt-5">
-      <form action="/" class="jumbotron text-center">
+      <form action="/" class="jumbotron text-center" novalidate>
         <div class="col-md-6">
           <label for="title">Book title</label>
-          <input type="text" id="title" name="title">
+          <input type="text" id="title" name="title" required>
+          <span></span>
         </div>
         <div class="col-md-6">
           <label for="author">Book author</label>
-          <input type="text" id="author" name="author">
+          <input type="text" id="author" name="author" required>
+          <span></span>
         </div>
         <div class="col-md-6">
           <label for="pages">Number of pages</label>
-          <input type="text" id="pages" name="pages">
+          <input type="text" id="pages" name="pages" required>
+          <span></span>
         <div>
           <label for="status">Read Status</label>
           <input type="checkbox" id="status" name="status">
